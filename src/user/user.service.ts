@@ -1,7 +1,9 @@
 import { User } from "./schemas/user.schema";
 import { UserRepository } from "./user.repository";
 import {v4 as uuidv4} from 'uuid'
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class UserService{
   constructor(private readonly userRepository: UserRepository){}
 
@@ -13,7 +15,7 @@ export class UserService{
     return this.userRepository.find({});
   }
 
-  async createUser(email: string, age: number): Promise<User>{
+  async createUser(email: string, age: number): Promise<any>{
     return this.userRepository.create({
       userId: uuidv4(),
       age,
@@ -23,6 +25,6 @@ export class UserService{
   }
 
   async updateUser(id: string, userDetails: Partial<User>): Promise<User>{
-    return this.userRepository.findAndUpdate({userId: id}, {...userDetails})
+    return this.userRepository.findOneAndUpdate({userId: id}, {...userDetails})
   }
 }

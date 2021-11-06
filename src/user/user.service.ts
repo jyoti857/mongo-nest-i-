@@ -4,6 +4,7 @@ import {v4 as uuidv4} from 'uuid'
 import { Injectable } from "@nestjs/common";
 import { GetUserArgs } from "./dto/args/get-user-args.dto";
 import { UpdateUserInput } from "./dto/input/update-user-input.dto";
+import { CreateUserInput } from "./dto/input/create-user-input.dto";
 
 @Injectable()
 export class UserService{
@@ -21,11 +22,10 @@ export class UserService{
     return this.userRepository.find({});
   }
 
-  async createUser(email: string, age: number): Promise<any>{
+  async createUser(createUserInput: CreateUserInput): Promise<any>{
     return this.userRepository.create({
+      ...createUserInput,
       userId: uuidv4(),
-      age,
-      email,
       favoriteFoods: [] 
     })
   }

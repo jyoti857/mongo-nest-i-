@@ -21,13 +21,8 @@ export class UserController{
   
   @Post()
   async createUser(@Body() createUserDto: CreateUserRequest): Promise<any>{
-    return this.userService.createUser(createUserDto.email, createUserDto.age);
+    return this.userService.createUser(createUserDto);
   }
-
-  // @Put(':userId')
-  // async updateUser(@Param('userId') userId: string, @Body() updateUser: UpdateUserRequest): Promise<User>{
-  //   return this.userService.updateUser(userId,updateUser);
-  // }
 
   @Put(':userId')
   async updateUser(@Param('userId') userId: string, @Body() updateUser: UpdateUserRequest): Promise<User>{

@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
@@ -8,10 +9,12 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-     GraphQLModule.forRoot({
-       autoSchemaFile: true,
-     }),
-    MongooseModule.forRoot('mongodb://localhost:27017/guay'), 
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
+    GraphQLModule.forRoot({
+      autoSchemaFile: true,
+    }),
     UserModule,
     DatabaseModule
   ],

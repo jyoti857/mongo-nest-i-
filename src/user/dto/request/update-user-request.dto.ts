@@ -1,4 +1,4 @@
-export class UpdateUserDto{
+export class UpdateUserRequest{
   favoriteFoods: string[];
   age: number;
 }
